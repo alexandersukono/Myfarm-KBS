@@ -63,6 +63,8 @@ public class MyFarm {
         for(int i = 0; i < listTanaman.length; i++){
             tanaman.addTerm(new Constant(listTanaman[i],i));
         }
+        tanaman.setDefuzzifier(new Centroid(200));
+        tanaman.fuzzyOutput().setAccumulation(new Maximum());
         engine.addOutputVariable(tanaman);
 
         Rule r1 = new Rule();
@@ -70,10 +72,14 @@ public class MyFarm {
         r1.setWeight(0.63);
         
         RuleBlock ruleBlock = new RuleBlock();
-        ruleBlock.addRule(r1);
+        ruleBlock.setEnabled(true);
+        ruleBlock.setName("");
+        ruleBlock.setConjunction(new Minimum());
+        ruleBlock.setDisjunction(new Maximum());
+        ruleBlock.setActivation(new Minimum());
+	ruleBlock.addRule(r1);
         engine.addRuleBlock(ruleBlock);
 
-        engine.configure("Minimum", "Maximum", "Minimum", "Maximum", "Centroid");
 
         StringBuilder status = new StringBuilder();
         if (!engine.isReady(status)) {
