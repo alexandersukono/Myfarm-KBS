@@ -51,6 +51,7 @@ public class KBSForm extends javax.swing.JFrame {
         jLabel7.setText("jLabel7");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(51, 204, 0));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setText("Sistem Rekomendasi Penanaman");
@@ -69,13 +70,13 @@ public class KBSForm extends javax.swing.JFrame {
 
         jLabel2.setText("Suhu              ");
 
-        jLabel3.setText("Ketinggian");
+        jLabel3.setText("Ketinggian (0-3000 m)");
 
-        jLabel4.setText("Kelembapan ");
+        jLabel4.setText("Kelembapan (50-100)");
 
-        jLabel5.setText("Curah Hujan ");
+        jLabel5.setText("Curah Hujan (0-4000 mm persegi)");
 
-        jLabel6.setText("Tingkat Keasaman");
+        jLabel6.setText("Keasaman Tanah(pH 0-14)");
 
         executeButton.setText("Execute");
         executeButton.addActionListener(new java.awt.event.ActionListener() {
@@ -120,7 +121,7 @@ public class KBSForm extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(151, 151, 151)
                         .addComponent(executeButton)))
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -167,8 +168,9 @@ public class KBSForm extends javax.swing.JFrame {
 
     private void executeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_executeButtonActionPerformed
         int suhu, ketinggian, kelembapan, curahHujan, keasaman;
-        
+        MyFarm mf=new MyFarm();
         try {
+            //0-60 Celsius
             suhu = Integer.parseInt(this.suhuField.getText());
         }
         catch (Exception e) {
@@ -177,6 +179,7 @@ public class KBSForm extends javax.swing.JFrame {
         }
         
         try {
+            //0-3000
             ketinggian = Integer.parseInt(this.ketinggianField.getText());
         }
         catch (Exception e) {
@@ -185,6 +188,7 @@ public class KBSForm extends javax.swing.JFrame {
         }
         
         try {
+            //50-100
             kelembapan = Integer.parseInt(this.kelembapanField.getText());
         }
         catch (Exception e) {
@@ -193,6 +197,7 @@ public class KBSForm extends javax.swing.JFrame {
         }
         
         try {
+            //0-4000
             curahHujan = Integer.parseInt(this.curahHujanField.getText());
         }
         catch (Exception e) {
@@ -201,6 +206,7 @@ public class KBSForm extends javax.swing.JFrame {
         }
         
         try {
+            //0-14
             keasaman = Integer.parseInt(this.keasamanField.getText());
         }
         catch (Exception e) {
@@ -208,7 +214,7 @@ public class KBSForm extends javax.swing.JFrame {
             return;
         }
         
-        this.answer.setText("" + suhu);
+        this.answer.setText(mf.classify(ketinggian, kelembapan, curahHujan, keasaman));
     }//GEN-LAST:event_executeButtonActionPerformed
 
     /**
@@ -238,7 +244,7 @@ public class KBSForm extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-
+        MyFarm mf=new MyFarm();
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

@@ -57,7 +57,7 @@ public class MyFarm {
         ph = new InputVariable();
         ph.setEnabled(true);
         ph.setName("ph");
-        ph.setRange(0, 4000);
+        ph.setRange(0, 14);
         ph.addTerm(new Triangle("asam_kuat", 0, 2.75, 5.5));
         ph.addTerm(new Triangle("asam_lemah", 5, 6, 7));
         ph.addTerm(new Triangle("netral", 6.5, 7, 7.5));
